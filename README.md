@@ -10,8 +10,9 @@ For more information on Stan and PyStan, please see the documentation at http://
 ## Command line interface
 
 ### Usage
-The correct command line usage of the program is summarized by the following usage message  (```python gpmicrobiome.py --help ```)
+The correct command line usage of the program is summarized by the following usage message
 ```
+$ python gpmicrobiome.py --help 
 usage: gpmicrobiome.py [-h] -t TIME_POINTS [-p TIME_POINTS_I] -d COUNT_DATA -o OUTPUT_FILE [-v]
 
 GPMicrobiome
@@ -76,7 +77,7 @@ The output file **samples.p** can be read in Python as follows
 import pickle
 T,T_p,samples = pickle.load(open('samples.p','rb'))
 ```
-The posterior means of Thetas can be printed as
+Then the posterior means of Thetas can be printed as
 ```python
 print samples['Theta_G'].mean(0).T
 if samples.has_key('Theta_G_i'):
