@@ -59,7 +59,7 @@ $ cat prediction_timepoints.tsv
 9
 ```
 
-### Examples
+### Sampling
 If the goal is to estimate the underlying compositions at measurement time points without producing predictions, then the following command should be executed
 ```
 python gpmicrobiome.py -t timepoints.tsv -d counts.tsv -o samples.p
