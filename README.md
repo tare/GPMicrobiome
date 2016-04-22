@@ -85,8 +85,8 @@ if samples.has_key('Theta_G_i'):
 Note that the *if* statement is used to check whether predictions were made. The orders of rows and columns correspond the orders of **timepoints.tsv**, **prediction_timepoints.tsv**, and **data.tsv**.
 
 ## Application programming interface
+In addition to the command line interface, GPMicrobiome can be used directly from Python.
 
-### Usage
 Assume that the user has data in numpy arrays **T** (1D array containing measurement time points), **T_p** (1D array containing prediction time points, empty array corresponds to the prediction-free case), and **counts** (2D array containing counts so that rows and columns represent species and time points, respectively). Then the sampling procedure can be done as follows
 ```python
 from gpmicrobiome import stan_init_data, get_samples 
