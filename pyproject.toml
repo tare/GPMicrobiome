@@ -27,14 +27,13 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.13"
+python = "^3.10"
 numpyro = "^0.13.2"
 matplotlib = {version = "^3.8.1", optional = true}
 jupyterlab = {version = "^4.0.8", optional = true}
 scipy = "^1.11.3"
 ipywidgets = {version = "^8.1.1", optional = true}
 pandas = "^2.1.3"
-funsor = "^0.4.5"
 
 [tool.poetry.extras]
 examples = ["jupyterlab", "matplotlib", "ipywidgets"]
