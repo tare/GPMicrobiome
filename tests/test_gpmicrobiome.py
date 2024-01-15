@@ -252,8 +252,8 @@ def test_get_mcmc_summary() -> None:
     nuts_kernel = NUTS(model)
     mcmc = MCMC(
         nuts_kernel,
-        num_warmup=100,
-        num_samples=100,
+        num_warmup=500,
+        num_samples=500,
         num_chains=4,
     )
     key, key_ = random.split(key, 2)
