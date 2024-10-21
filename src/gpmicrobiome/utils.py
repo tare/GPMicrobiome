@@ -1,5 +1,7 @@
 """utils.py."""
-from typing import Any, Mapping
+
+from collections.abc import Mapping
+from typing import Any
 
 import jax.numpy as jnp
 import numpy as np
@@ -31,7 +33,8 @@ def get_mcmc_summary(mcmc: MCMC) -> pd.DataFrame:
                     res["index"] = [
                         tuple(map(int, x))
                         for x in zip(
-                            *jnp.unravel_index(jnp.arange(values.size), values.shape)
+                            *jnp.unravel_index(jnp.arange(values.size), values.shape),
+                            strict=True,
                         )
                     ]
                 else:

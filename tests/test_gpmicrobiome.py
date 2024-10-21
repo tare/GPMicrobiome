@@ -1,12 +1,14 @@
 """test_gpmicrobiome.py."""
+
 import jax.numpy as jnp
 import numpyro
 import numpyro.distributions as dist
 import pytest
-from gpmicrobiome import run_nuts
-from gpmicrobiome.utils import get_mcmc_summary
 from jax import random
 from numpyro.infer import MCMC, NUTS
+
+from gpmicrobiome import run_nuts
+from gpmicrobiome.utils import get_mcmc_summary
 
 SAMPLING_ZERO_B = 1e-2
 NON_SAMPLING_ZERO_B = 0.5
@@ -57,7 +59,7 @@ def test_gpmicrobiome_w_zero_inflation() -> None:
 
 
 @pytest.mark.parametrize("prediction", [True, False])
-def test_gpmicrobiome_w_deterministic(prediction: bool) -> None:
+def test_gpmicrobiome_w_deterministic(prediction: bool) -> None:  # noqa: FBT001
     """Check that we can store deterministic sites."""
     num_timepoints = 5
     num_pred_timepoints = 5
@@ -96,7 +98,7 @@ def test_gpmicrobiome_w_deterministic(prediction: bool) -> None:
 
 
 @pytest.mark.parametrize("prediction", [True, False])
-def test_gpmicrobiome_wout_deterministic(prediction: bool) -> None:
+def test_gpmicrobiome_wout_deterministic(prediction: bool) -> None:  # noqa: FBT001
     """Check that we can discard deterministic sites."""
     num_timepoints = 5
     num_otus = 3
@@ -192,10 +194,10 @@ def test_gpmicrobiome_sampling_zero_detection() -> None:
     num_otus = 3
     x = jnp.arange(num_timepoints)[:, None]
     y = 1000 * jnp.ones((num_timepoints, num_otus))
-    y = y.at[num_timepoints // 2, 0].set(0)
+    y = y.at[num_timepoints // 2, 0].set(0)  # noqa: PD008
 
     sampling_zeros = (
-        jnp.zeros((num_timepoints, num_otus), dtype=bool)
+        jnp.zeros((num_timepoints, num_otus), dtype=bool)  # noqa: PD008
         .at[num_timepoints // 2, 0]
         .set(True)
     )

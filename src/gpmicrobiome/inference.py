@@ -1,4 +1,5 @@
 """inference.py."""
+
 import jax.numpy as jnp
 import numpyro.distributions as dist
 from jax import Array, random
@@ -13,16 +14,17 @@ KeyArray = Array
 
 
 def run_nuts(
-    key: KeyArray,
+    key: Array,
     X: Array,
     y: Array,
     X_pred: Array | None = None,
-    reference_category: int | Array | None = None,
+    reference_category: int | None = None,
     priors: dict[str, dist.Distribution] | None = None,
     num_basis: int = 10,
     num_warmup: int = 1_000,
     num_samples: int = 1_000,
     num_chains: int = 4,
+    *,
     use_deterministic: bool = False,
     consider_zero_inflation: bool = True,
 ) -> MCMC:
@@ -56,10 +58,6 @@ def run_nuts(
             len(X_pred.shape) == GP_INPUT_DIMENSIONS
         ), "X_pred should have two dimensions when provided"
 
-    reference_category = reference_category or (
-        jnp.argsort(jnp.sum(y, 0))[y.shape[1] // 2]
-    ).astype(int)
-
     priors = get_default_priors() | (priors if priors is not None else {})
 
     key, key_ = random.split(key, 2)
@@ -77,7 +75,8 @@ def run_nuts(
         y=y,
         num_basis=num_basis,
         priors=priors,
-        reference_category=reference_category,
+        reference_category=reference_category
+        or (jnp.argsort(jnp.sum(y, 0))[y.shape[1] // 2]).astype(int),
         X_pred=X_pred,
         use_deterministic=use_deterministic,
         consider_zero_inflation=consider_zero_inflation,

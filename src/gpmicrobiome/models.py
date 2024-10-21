@@ -1,4 +1,5 @@
 """models.py."""
+
 import jax.numpy as jnp
 import numpyro
 import numpyro.distributions as dist
@@ -126,6 +127,7 @@ def model(
     priors: dict[str, dist.Distribution],
     X_pred: Array | None = None,
     reference_category: int | Array = 0,
+    *,
     use_deterministic: bool = False,
     consider_zero_inflation: bool = True,
 ) -> None:
@@ -146,8 +148,8 @@ def model(
     if X_pred is not None:
         X = jnp.vstack((X, X_pred))
 
-    X = X - jnp.min(X)
-    X = X - 0.5 * jnp.max(X)
+    X -= jnp.min(X)
+    X -= 0.5 * jnp.max(X)
 
     L = jnp.asarray([1.5 * jnp.max(X)])
     M = X.shape[-1] * [num_basis]
