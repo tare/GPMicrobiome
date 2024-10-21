@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "gpmicrobiome"
-version = "1.0.0a0"
+version = "1.0.0"
 description = "Temporal probabilistic modeling of bacterial compositions derived from 16S rRNA sequencing"
 authors = [
     "Tarmo Äijö <tarmo.aijo@gmail.com>",
