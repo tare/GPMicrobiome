@@ -24,9 +24,10 @@ def get_mcmc_summary(mcmc: MCMC) -> pd.DataFrame:
     def process_variable(
         variable: str, data: Mapping[str, npt.NDArray[np.float64] | np.float64]
     ) -> dict[str, Any]:
-        res: dict[str, str | list[tuple[int, ...]] | list[np.float64] | list[None]] = {
-            "variable": variable
-        }
+        res: dict[
+            str,
+            str | list[tuple[int, ...]] | list[np.float64] | list[float] | list[None],
+        ] = {"variable": variable}
         for statistic, values in data.items():
             if "index" not in res:
                 if isinstance(values, np.ndarray):
